@@ -15,6 +15,8 @@ pour chaque campus gardé, un objet sous la forme : { VILLE: NB_ELEVES }.
 Arguments en entrée:
 
 1. Tableau des campus:
+*/
+let campuses =
 [
   { city: 'Bordeaux',
     curriculums: [
@@ -42,7 +44,7 @@ Arguments en entrée:
     ]
   }
 ]
-
+/*
 2. Nom du cursus: 'PHP/Symfony'
 
 Sortie attendue:
@@ -51,6 +53,19 @@ Sortie attendue:
 */
 
 function getStudentsPerCurriculum(campuses, curriculumName) {
+  let campusOK = campuses.filter(c => {
+    let isOk = c.curriculums.filter(course => course.name === curriculumName);
+    // if c.curriculums includes curriculumName, replace c.curriculums with this curriculumName property only.
+    c.curriculums = isOk;
+    // return campus only if c.curriculums inclus curriculumName
+    return isOk.length > 0;
+  })
+  return campusOK.map(campus => {
+    let number = campus.curriculums[0].numStudents;
+    return {[campus.city] : number };
+  });
 }
+
+console.log(getStudentsPerCurriculum(campuses, 'PHP/Symfony'))
 
 module.exports = getStudentsPerCurriculum;
