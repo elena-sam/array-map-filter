@@ -5,11 +5,11 @@ Il s'agit d'écrire une fonction getActivitiesMembers qui reçoit deux arguments
 * un deuxième tableau représentant des personnes, et leurs hobbies
 
 Exemple d'argument pour le premier tableau:
-
+*/ 
+let act = 
 ['Badminton', 'Tennis', 'Volley-ball', 'Base-ball', 'Soccer', 'Basket-ball', 'Cycling']
 
-Et pour le deuxième:
-
+let pers =
 [
   { name: 'Jay Fox', activities: [ 'Badminton' ] },
   { name: 'Jenson Gardner', activities: [ 'Badminton', 'Tennis' ] },
@@ -22,7 +22,7 @@ Et pour le deuxième:
   { name: 'Tripp Cash', activities: [ 'Badminton' ] },
   { name: 'Ross Howard', activities: [ 'Cycling' ] }
 ]
-
+/*
 La fonction doit renvoyer un tableau d'objets, chacun contenant les propriétés:
 * activity: le nom de l'activité
 * persons: le nom des pratiquants de cette activité
@@ -60,13 +60,20 @@ En prenant les deux exemples d'arguments d'entrée, on obtiendrait ceci en sorti
     persons: [ 'Ross Howard' ]
   }
 ]
-
 */
 
+
 function getActivitiesMembers(activities, persons) {
+  return activities.map(a => {
+    let participants = persons.filter(p => p.activities.includes(a));
+    return {
+      activity: a,
+      persons: participants.map(n => n.name)
+    }
+  })
 }
 
-
+console.log(getActivitiesMembers(act, pers));
 
 // Ne pas modifier l'export
 module.exports = getActivitiesMembers;
